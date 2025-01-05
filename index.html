@@ -229,6 +229,15 @@
         return distances[target];
     }
 
+    function computeOccurs(target, guess) {
+        let text = data[target].content
+            .replace(/\[\[\!redirects .*\]\]/g, "")
+            .replace(/\[\[[^\[\]]+\|([^\[\]]+)\]\]/g, "$1")
+            .replace(/\$[^\$]+\$/g, "")
+            .replace(/\[\[([^\[\]]+)\]\]/g, "$1");
+        return text.split(guess).length - 1;
+    }
+
     let filteredArticles;
     let artMap = {};
     async function main() {
@@ -333,7 +342,7 @@
             updateGuessElem(guessElem, {
                 distance: avgDist,
                 commonlinks: computeCommonLinks(target, guessLink),
-                occurs: data[target].content.split(guessLink).length - 1
+                occurs: computeOccurs(target, guessLink)
             });
 
             saveGuessData();
