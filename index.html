@@ -233,7 +233,7 @@
         let text = data[target].content
             .replace(/\[\[\!redirects .*\]\]/g, "")
             .replace(/\[\[[^\[\]]+\|([^\[\]]+)\]\]/g, "$1")
-            .replace(/\$[^\$]+\$/g, "")
+//            .replace(/\$[^\$]+\$/g, "")
             .replace(/\[\[([^\[\]]+)\]\]/g, "$1");
         return text.split(guess).length - 1;
     }
